@@ -80,7 +80,9 @@ function styles() {
         .pipe(sassGlob())
         .pipe(sourcemaps.init())
         .pipe(gulpIf(isDev, sourcemaps.init()))// Нужен для *.scss в import
-        .pipe(sass()) //{outputStyle:'compressed'}
+        .pipe(sass({
+            includePaths: require('node-normalize-scss').includePaths
+        })) //{outputStyle:'compressed'}
         .pipe(postcss(postCssPlugins))
         //.pipe(groupMediaQueries())
         .pipe(cleanCss())
